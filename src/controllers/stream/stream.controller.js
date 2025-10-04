@@ -1,6 +1,6 @@
 import { streamServiceChunk } from '../../services/stream/stream.service.js';
 
-export const streamController = (req, res) => {
+const streamController = (req, res) => {
 
   const body = req.body;
 
@@ -17,4 +17,8 @@ export const streamController = (req, res) => {
     .catch((err) => {
       res.status(500).send({ message: 'Error', error: err });
     });
+};
+
+export {
+  streamController
 };
