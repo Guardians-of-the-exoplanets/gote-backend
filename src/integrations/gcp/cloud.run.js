@@ -1,9 +1,9 @@
 import LoggerService from '../../utils/logger/logger.service.js';
 
-export async function postToStreamingEndpoint() {
+export async function postToStreamingEndpoint(endpoint) {
   const url = process.env.CLOUD_RUN_URL;
   const data = {
-    endpoint: 'predict',
+    endpoint: endpoint,
   };
 
   return await fetch(url, {
@@ -14,10 +14,9 @@ export async function postToStreamingEndpoint() {
     body: JSON.stringify(data),
   })
     .then(async (response) => {
-
       LoggerService.info(`Response: ${response.status}`);
       LoggerService.info(`Response Body: ${JSON.stringify(response)}`);
-        
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }

@@ -3,5 +3,5 @@ import { streamController } from '../controllers/stream/stream.controller.js';
 
 const routes = express.Router();
 
-routes.route('/').get(streamController);
+routes.route('/').post(streamController);
 export default routes;

@@ -1,7 +1,12 @@
 import { streamServiceChunk } from '../../services/stream/stream.service.js';
 
-export const streamController = (_, res) => {
-  streamServiceChunk()
+export const streamController = (req, res) => {
+
+  const body = req.body;
+
+  streamServiceChunk(
+    body.endpoint || 'health'
+  )
     .then((response) => {
       if (response) {
         res.status(200).send({ message: 'Streaming started', data: response });
