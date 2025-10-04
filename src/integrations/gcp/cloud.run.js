@@ -1,17 +1,16 @@
 import LoggerService from '../../utils/logger/logger.service.js';
 
-export async function postToStreamingEndpoint(endpoint) {
+export async function postToStreamingEndpoint( modelData ) {
   const url = process.env.CLOUD_RUN_URL;
-  const data = {
-    endpoint: endpoint,
-  };
+
+  console.log("modelData", modelData);
 
   return await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(modelData),
   })
     .then(async (response) => {
       LoggerService.info(`Response: ${response.status}`);
