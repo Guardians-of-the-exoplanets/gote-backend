@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '23'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Jest tests
+      run: npm test
+
+    - name: Start server
+      run: |
+        npm run serve &
+        sleep 5  # Give the server some time to start
+
+    - name: Health Check
+      run: |
+        HTTP_RESPONSE=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:3000/healthcheck)
+        if [ "$HTTP_RESPONSE" -ne 200 ]; then
+          echo "Health check failed with response code $HTTP_RESPONSE"
+          exit 1
+        else
+          echo "Health check passed!"
+        fi
+
+    - name: Stop server
+      run: kill $(jobs -p)

@@ -1,0 +1,50 @@
+{
+  "name": "gote-backend",
+  "version": "1.0.0",
+  "description": "This is a project for Nasa Challenge named \"A World Away: Hunting for Exoplanets with AI\"",
+  "keywords": [
+    "exoplanet",
+    "nasa",
+    "nasa_challenge",
+    "machine_learning",
+    "javascript",
+    "hackaton"
+  ],
+  "engines": {
+    "node": ">=23.0.0",
+    "npm": ">=11.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benedictotavio/gote-backend"
+  },
+  "bugs": {
+    "url": "https://github.com/benedictotavio/gote-backend/issues"
+  },
+  "homepage": "https://github.com/benedictotavio/gote-backend#readme",
+  "license": "ISC",
+  "author": "benedictotavio",
+  "type": "module",
+  "main": "yes",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "test": "jest",
+    "start": "node src/index.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "eslint": "^9.37.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.4.0",
+    "jest": "^29.7.0",
+    "pino-pretty": "^13.1.1",
+    "prettier": "^3.6.2"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "pino": "^10.0.0"
+  }
+}
