@@ -28,5 +28,4 @@ class LoggerService {
     }
 }
 
-// Exporta a classe
 export default LoggerService;
