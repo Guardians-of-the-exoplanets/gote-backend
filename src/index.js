@@ -25,26 +25,25 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
   process.env.FRONTEND_URL,
-  undefined
 ];
 
 const corsOptions = {
-    origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
 
-        if (allowedOrigins.includes(origin)) {
-            callback(null, true); // Origin is allowed
-        } else {
-            callback(LoggerService.error(`Origin ${origin} is not allowed`));
-        }
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['*'],
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true); // Origin is allowed
+    } else {
+      callback(LoggerService.error(`Origin ${origin} is not allowed`));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['*'],
 };
 
 app.use(cors(corsOptions), (req, res, next) => {
-    next();
+  next();
 });
 
 app.use('/healthcheck', healthcheckRoutes);
