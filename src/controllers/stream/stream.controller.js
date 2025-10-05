@@ -1,7 +1,4 @@
 import { exoplanetClassifier } from '../../services/stream/stream.service.js';
-import NodeCache from 'node-cache';
-
-const cache = new NodeCache({ stdTTL: 100, checkperiod: 320 });
 
 export class StreamController {
   static async exoplanetClassifier(req, res) {
@@ -53,11 +50,6 @@ export class StreamController {
       await exoplanetClassifier('predict_manual', dataset, data, (chunk) => {
         res.write(`data: ${chunk}\n\n`);
       });
-
-      // TODO: Isolate caching logic into service layer
-      cache.set(
-        req.locals?.cacheKey, JSON.stringify({ mode, dataset, data, hyperparameters })
-      );
 
       res.write('event: done\ndata: end of stream\n\n');
       res.end();
