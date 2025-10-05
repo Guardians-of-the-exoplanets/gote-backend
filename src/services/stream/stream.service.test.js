@@ -1,7 +1,7 @@
 import { exoplanetClassifier } from './stream.service.js';
 import { postToStreamingEndpoint } from '../../integrations/model.integration.js';
 
-jest.mock('../../integrations/gcp/model.integration.js');
+jest.mock('../../integrations/model.integration.js');
 
 describe('exoplanetClassifier function', () => {
     test('should call postToStreamingEndpoint with correct parameters', async () => {
