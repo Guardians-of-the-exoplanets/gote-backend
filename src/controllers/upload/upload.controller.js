@@ -1,4 +1,5 @@
 import { uploadService } from "../../services/upload/upload.service.js";
+import LoggerService from "../../utils/logger/logger.service.js";
 
 export class UploadController {
   static async exoplanetClassifier(req, res) {
@@ -19,6 +20,7 @@ export class UploadController {
 
     if(hyperparameters) {
       if (typeof hyperparameters === "string") {
+        LoggerService.info("Parsing hyperparameters from string to JSON");
         hyperparameters = JSON.parse(hyperparameters);
       }
   

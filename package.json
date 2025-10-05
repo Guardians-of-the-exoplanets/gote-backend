@@ -30,12 +30,14 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "test": "jest --coverage --passWithNoTests",
+    "test": "jest --coverage",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.28.3",
     "@eslint/js": "^9.37.0",
+    "babel-jest": "^30.2.0",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
@@ -51,7 +53,8 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "multer": "^2.0.2",
-    "pino": "^10.0.0"
+    "pino": "^10.0.0",
+    "supertest": "^7.1.4"
   },
   "jest": {
     "testEnvironment": "node",
@@ -59,9 +62,12 @@
       "/node_modules/"
     ],
     "testMatch": [
-      "**/__tests__/**/*.js?(x)",
-      "**/?(*.)+(spec|test).js?(x)"
+      "**/__tests__/**/*.test.[jt]s?(x)",
+      "**/?(*.)+(spec|test).[jt]s?(x)"
     ],
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
     "moduleFileExtensions": [
       "js",
       "json"

@@ -1,4 +1,4 @@
-import LoggerService from '../../utils/logger/logger.service.js';
+import LoggerService from '../utils/logger/logger.service.js';
 
 export async function postToStreamingEndpoint(modelData, onChunk) {
   const url = process.env.CLOUD_RUN_URL;

@@ -1,3 +1,3 @@
 export const healthcheck = () => {
-    return 'OK';
+  return 'OK';
 };
