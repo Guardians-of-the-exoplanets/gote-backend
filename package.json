@@ -30,7 +30,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "test": "jest",
+    "test": "jest --coverage --passWithNoTests",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
