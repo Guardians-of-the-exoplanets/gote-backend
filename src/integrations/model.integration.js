@@ -14,10 +14,6 @@ export async function postToStreamingEndpoint(modelData, onChunk) {
     delete modelData.hyperparametersData;
   }
 
-  console.log('Posting to streaming endpoint:', JSON.stringify(body));
-  LoggerService.warn('Posting to streaming endpoint:', JSON.stringify(body));
-  LoggerService.info('Posting to streaming endpoint:', JSON.stringify(body));
-
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

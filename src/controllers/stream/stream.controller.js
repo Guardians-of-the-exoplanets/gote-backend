@@ -26,7 +26,12 @@ export class StreamController {
       return res.status(400).json({ error: 'Missing mandatory data' });
     }
 
-    // validate tess mandatory data
+    if (
+      dataset === 'tess' &&
+      (data.st_tmag == null || data.pl_tranmid == null || data.pl_tranmiderr2 == null)
+    ) {
+      return res.status(400).json({ error: 'Missing mandatory data' });
+    }
 
     if (
       hyperparameters &&
