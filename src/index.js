@@ -1,6 +1,7 @@
 import express from 'express';
 import LoggerService from './utils/logger/logger.service.js';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 import multer from "multer";
 
@@ -17,6 +18,7 @@ const upload = multer();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(cors());
 
 app.use('/healthcheck', healthcheckRoutes);
 app.use('/stream', streamRoutes);
