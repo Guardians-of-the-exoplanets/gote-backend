@@ -25,11 +25,11 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
   process.env.FRONTEND_URL,
+  undefined
 ];
 
 const corsOptions = {
     origin: function (origin, callback) {
-        console.log('Origin:', origin);
         // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
 
@@ -39,8 +39,8 @@ const corsOptions = {
             callback(new Error('Not allowed by CORS')); // Origin is not allowed
         }
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-    allowedHeaders: ['*'], // Allow all headers
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['*'],
 };
 
 app.use(cors(corsOptions));
