@@ -14,7 +14,7 @@ export async function postToStreamingEndpoint(modelData, onChunk) {
     delete modelData.hyperparametersData;
   }
 
-  LoggerService.info('Posting to streaming endpoint:', JSON.stringify(body));
+  LoggerService.info('Posting to streaming endpoint:' + JSON.stringify(body));
 
   const response = await fetch(url, {
     method: 'POST',
@@ -22,11 +22,11 @@ export async function postToStreamingEndpoint(modelData, onChunk) {
     body: JSON.stringify(body),
   })
     .then((res) => {
-      LoggerService.info('Response status from Model:', res.status);
+      LoggerService.info('Response status from Model:' + res.status);
       return res;
     })
     .catch((error) => {
-      LoggerService.error('Error in fetch Model:', error);
+      LoggerService.error('Error in fetch Model:' + error);
       throw error;
     });
 
