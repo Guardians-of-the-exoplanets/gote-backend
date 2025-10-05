@@ -3,7 +3,6 @@ import { Readable } from "stream";
 
 export const convertCsv = (req, res, next) => {
   try {
-    console.log("req middle", req.file);
     if(!req.file) {
       return res.status(400).json({ error: "No file sent" });
     }
@@ -15,7 +14,6 @@ export const convertCsv = (req, res, next) => {
 
     archive.on("end", () => {
       const buffer = Buffer.concat(chunks);
-      console.log("buffer", buffer);
       req.zipBase64 = buffer.toString("base64");
       next();
     });
