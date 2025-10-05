@@ -6,6 +6,7 @@ import multer from "multer";
 
 import healthcheckRoutes from './routes/healthcheck.routes.js';
 import uploadRoutes from './routes/upload.routes.js';
+import streamRoutes from './routes/stream.routes.js';
 import { convertCsv } from './utils/middleware/convert-csv.middleware.js';
 
 dotenv.config();
@@ -18,6 +19,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use('/healthcheck', healthcheckRoutes);
+app.use('/stream', streamRoutes);
 app.use('/upload', upload.single("file"), convertCsv, uploadRoutes);
 
 // Start the server

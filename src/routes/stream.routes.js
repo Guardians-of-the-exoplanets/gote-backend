@@ -1,9 +1,8 @@
 import express from 'express';
-import { streamController } from '../controllers/stream/stream.controller.js';
-import { convertCsv } from '../utils/middleware/convert-csv.middleware.js';
+import { StreamController } from '../controllers/stream/stream.controller.js';
 
 const routes = express.Router();
 
-routes.route('/exoplanet').post(streamController, convertCsv);
+routes.route('/exoplanet').post(StreamController.exoplanetClassifier);
 
 export default routes;
