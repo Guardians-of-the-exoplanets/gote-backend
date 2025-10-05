@@ -36,14 +36,16 @@ const corsOptions = {
         if (allowedOrigins.includes(origin)) {
             callback(null, true); // Origin is allowed
         } else {
-            callback(new Error('Not allowed by CORS')); // Origin is not allowed
+            callback(LoggerService.error(`Origin ${origin} is not allowed`));
         }
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['*'],
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions), (req, res, next) => {
+    next();
+});
 
 app.use('/healthcheck', healthcheckRoutes);
 app.use('/stream', streamRoutes);
