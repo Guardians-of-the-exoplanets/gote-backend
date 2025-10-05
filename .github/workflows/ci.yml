@@ -30,7 +30,7 @@ jobs:
     - name: Start server
       run: |
         npm run start &
-        sleep 5  # Give the server some time to start
+        sleep 10  # Give the server some time to start
 
     - name: Health Check
       run: |
@@ -43,4 +43,4 @@ jobs:
         fi
 
     - name: Stop server
-      run: kill $(jobs -p)
+      run: kill $(lsof -t -i:3000) || true
