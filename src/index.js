@@ -39,8 +39,7 @@ const corsOptions = {
         }
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-    credentials: true // Allow credentials
+    allowedHeaders: ['*'], // Allow all headers
 };
 
 app.use(cors(corsOptions));
