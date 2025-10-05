@@ -120,6 +120,12 @@ Deployed on [Render](https://render.com) with the following settings:
 
 > [gote-backend](https://gote-backend.onrender.com)
 
+#### Observable Metrics
+
+![observability](./docs/observability.png)
+
+> This console shell is available at [https://render.com](https://render.com)
+
 ## License
 
 MIT License
