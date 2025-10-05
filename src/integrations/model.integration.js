@@ -9,6 +9,11 @@ export async function postToStreamingEndpoint(modelData, onChunk) {
     delete modelData.data.hyperparameters;
   }
 
+  if (modelData.hyperparametersData) {
+    body.hyperparameters = modelData.hyperparametersData;
+    delete modelData.hyperparametersData;
+  }
+
   console.log('Posting to streaming endpoint:', JSON.stringify(body));
   LoggerService.warn('Posting to streaming endpoint:', JSON.stringify(body));
   LoggerService.info('Posting to streaming endpoint:', JSON.stringify(body));
