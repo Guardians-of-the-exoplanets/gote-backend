@@ -9,12 +9,14 @@ export async function postToStreamingEndpoint(modelData, onChunk) {
     delete modelData.data.hyperparameters;
   }
 
+  LoggerService.info('Posting to streaming endpoint:', JSON.stringify(body));
+
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   }).then((res) => res).catch((error) => {
-    LoggerService.error('Error in fetch to Cloud Run:', error);
+    LoggerService.error('Error in fetch Model:', error);
     throw error;
   });
 

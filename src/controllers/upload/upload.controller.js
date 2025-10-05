@@ -20,7 +20,6 @@ export class UploadController {
 
     if(hyperparameters) {
       if (typeof hyperparameters === "string") {
-        LoggerService.info("Parsing hyperparameters from string to JSON");
         hyperparameters = JSON.parse(hyperparameters);
       }
   
