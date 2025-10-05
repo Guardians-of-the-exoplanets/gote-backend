@@ -18,7 +18,17 @@ const upload = multer();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+  {
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:3000',
+      process.env.FRONTEND_URL
+    ],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
+  }
+));
 
 app.use('/healthcheck', healthcheckRoutes);
 app.use('/stream', streamRoutes);
