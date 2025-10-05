@@ -29,7 +29,7 @@ jobs:
 
     - name: Start server
       run: |
-        npm run serve &
+        npm run start &
         sleep 5  # Give the server some time to start
 
     - name: Health Check
