@@ -35,7 +35,7 @@ describe('convertCsv function', () => {
     // Here you could add more checks for zip contents if necessary
   });
 
-  test('should handle errors appropriately', async () => {
+  test('should handle errors invalid Buffer', async () => {
     // Mocking an error scenario by sending an invalid file buffer
     const invalidBuffer = null; // This will simulate an error in the middleware
 

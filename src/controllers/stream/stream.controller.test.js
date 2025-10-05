@@ -103,4 +103,47 @@ describe('StreamController.exoplanetClassifier', () => {
         expect(response.status).toBe(400);
         expect(response.text).toContain('{\"error\":\"Missing mandatory data\"}');
     });
+
+    test('should return 400 if mandatory data from keppler is missing', async () => {
+        const response = await request(app).post('/exoplanet').send({
+            mode: 'test',
+            dataset: 'keppler',
+            data: { koi_fpflag_ss: null, koi_model_snr: null },
+        });
+        expect(response.status).toBe(400);
+        expect(response.body).toEqual({ error: 'Missing mandatory data' });
+    });
+
+    test('should include hyperparameters if provided', async () => {
+        const mockData = {
+            sy_pnum: 1,
+            soltype: 'G',
+            pl_orbper: 365,
+            koi_fpflag_ss: 0,
+            koi_fpflag_nt: 0,
+            koi_fpflag_co: 0,
+            koi_fpflag_ec: 0,
+            koi_model_snr: 10,
+            koi_prad: 1.0,
+        };
+        const hyperparameters = { param1: 'value1' };
+
+        exoplanetClassifier.mockImplementation((mode, dataset, data, onChunk) => {
+            expect(data.hyperparametersData).toEqual(hyperparameters);
+            onChunk('chunk data');
+            return Promise.resolve();
+        });
+
+        const response = await request(app)
+            .post('/exoplanet')
+            .send({
+                mode: 'test',
+                dataset: 'k2',
+                data: mockData,
+                hyperparameters,
+            });
+
+        expect(exoplanetClassifier).toHaveBeenCalled();
+        expect(response.status).toBe(200);
+    });
 });

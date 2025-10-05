@@ -110,4 +110,119 @@ describe('UploadController', () => {
         expect(response.text).toContain('event: error');
         expect(response.text).toContain('data: Retraining error');
     });
+
+    test('exoplanetClassifier should parse hyperparameters if provided as string', async () => {
+        const base64Data = 'base64EncodedData';
+        const hyperparameters = JSON.stringify({ param1: 'value1' });
+
+        uploadService.mockImplementation((body, onChunk) => {
+            expect(body.hyperparametersData).toEqual({ param1: 'value1' });
+            onChunk('chunk data');
+            return Promise.resolve();
+        });
+
+        const response = await request(app)
+            .post('/exoplanet')
+            .send({
+                mode: 'test',
+                dataset: 'kepler',
+                zipBase64: base64Data,
+                hyperparameters,
+            });
+
+        expect(response.status).toBe(200);
+        expect(uploadService).toHaveBeenCalledTimes(1);
+    });
+
+    test('modelRetraining should parse hyperparameters if provided as string', async () => {
+        const base64Data = 'base64EncodedData';
+        const hyperparameters = JSON.stringify({ param1: 'value1' });
+
+        uploadService.mockImplementation((body, onChunk) => {
+            expect(body.hyperparametersData).toEqual({ param1: 'value1' });
+            onChunk('training chunk data');
+            return Promise.resolve();
+        });
+
+        const response = await request(app)
+            .post('/retrain')
+            .send({
+                mode: 'retrain',
+                dataset: 'k2',
+                zipBase64: base64Data,
+                hyperparameters,
+            });
+
+        expect(response.status).toBe(200);
+        expect(uploadService).toHaveBeenCalledTimes(1);
+    });
+
+    test('modelRetraining should parse hyperparameters if provided as array', async () => {
+        const base64Data = 'base64EncodedData';
+        const hyperparameters = ['param1=value1', 'param2=value2'];
+
+        uploadService.mockImplementation((body, onChunk) => {
+            expect(body.hyperparametersData).toEqual({ param1: 'value1', param2: 'value2' });
+            onChunk('training chunk data');
+            return Promise.resolve();
+        });
+
+        const response = await request(app)
+            .post('/retrain')
+            .send({
+                mode: 'retrain',
+                dataset: 'k2',
+                zipBase64: base64Data,
+                hyperparameters,
+            });
+
+        expect(response.status).toBe(200);
+        expect(uploadService).toHaveBeenCalledTimes(1);
+    });
+
+    test('exoplanetClassifier should parse hyperparameters if provided as array', async () => {
+        const base64Data = 'base64EncodedData';
+        const hyperparameters = ['param1=value1', 'param2=value2'];
+
+        uploadService.mockImplementation((body, onChunk) => {
+            expect(body.hyperparametersData).toEqual({ param1: 'value1', param2: 'value2' });
+            onChunk('chunk data');
+            return Promise.resolve();
+        });
+
+        const response = await request(app)
+            .post('/exoplanet')
+            .send({
+                mode: 'test',
+                dataset: 'kepler',
+                zipBase64: base64Data,
+                hyperparameters,
+            });
+
+        expect(response.status).toBe(200);
+        expect(uploadService).toHaveBeenCalledTimes(1);
+    });
+
+    test('exoplanetClassifier should parse hyperparameters if provided as object', async () => {
+        const base64Data = 'base64EncodedData';
+        const hyperparameters = { param1: 'value1' };
+
+        uploadService.mockImplementation((body, onChunk) => {
+            expect(body.hyperparametersData).toEqual({ param1: 'value1' });
+            onChunk('chunk data');
+            return Promise.resolve();
+        });
+
+        const response = await request(app)
+            .post('/exoplanet')
+            .send({
+                mode: 'test',
+                dataset: 'kepler',
+                zipBase64: base64Data,
+                hyperparameters,
+            });
+
+        expect(response.status).toBe(200);
+        expect(uploadService).toHaveBeenCalledTimes(1);
+    });
 });

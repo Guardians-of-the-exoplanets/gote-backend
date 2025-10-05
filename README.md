@@ -108,6 +108,10 @@ curl --location 'https://gote-backend.onrender.com/stream/exoplanet' \
 }'
 ```
 
+### Coverage
+
+![coverage](./docs/coverage_tests.png)
+
 ### Deployment
 Deployed on [Render](https://render.com) with the following settings:
 
