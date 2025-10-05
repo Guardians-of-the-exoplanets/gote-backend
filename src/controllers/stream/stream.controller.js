@@ -7,11 +7,11 @@ export class StreamController {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    if(dataset === "k2" && (!data.sy_pnum || !data.soltype || !data.pl_orbper)) {
+    if(dataset === "k2" && (data.sy_pnum == null || data.soltype == null || data.pl_orbper == null)) {
       return res.status(400).json({ error: "Missing mandatory data" });
     }
 
-    if(dataset === "keppler" && (!data.koi_fpflag_ss || !data.koi_fpflag_nt || !data.koi_fpflag_co || !data.koi_fpflag_ec || !data.koi_model_snr || !data.koi_prad)) {
+    if(dataset === "keppler" && (data.koi_fpflag_ss == null || data.koi_fpflag_nt == null || data.koi_fpflag_co == null || data.koi_fpflag_ec == null || data.koi_model_snr == null || data.koi_prad == null)) {
       return res.status(400).json({ error: "Missing mandatory data" });
     }
 
