@@ -1,7 +1,7 @@
 import { exoplanetClassifier } from "../../services/stream/stream.service.js";
 export class StreamController {
   static async exoplanetClassifier(req, res) {
-    const { mode, dataset, data } = req.body;
+    const { mode, dataset, data, hyperparameters } = req.body;
 
     if (!mode && !dataset && !data) {
       return res.status(400).json({ error: "Missing required fields" });
@@ -16,6 +16,14 @@ export class StreamController {
     }
 
     // validate tess mandatory data
+
+    if (
+      hyperparameters &&
+      typeof hyperparameters === 'object' &&
+      !Array.isArray(hyperparameters)
+    ) {
+      data.hyperparameters = hyperparameters;
+    }
 
     res.setHeader("Content-Type", "text/event-stream");
     res.setHeader("Cache-Control", "no-cache");
